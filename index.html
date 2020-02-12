@@ -10,6 +10,20 @@
     const vaciar = () => {
       document.getElementById("pantalla").value = "";
     }
+	
+	const validar = () => {
+	
+	let num = document.getElementById("pantalla").value;
+	
+	  return !isNaN(num);
+	
+	}
+	
+	const error = () => {
+	
+	document.getElementById("info").innerHTML = "ERROR";
+	
+	}
 
     const rellenar_info = () => {
       let num = document.getElementById("pantalla").value;
@@ -23,20 +37,30 @@
     }
 
     const cuadrado = () => {
+	
+	if (validar()){
       let num = document.getElementById("pantalla");
       num.value = num.value * num.value;
       rellenar_info();
+	}else {error();}  
+	  
     }
 
     const mod = () => {
+	
+	if (validar()){
       let num = document.getElementById("pantalla");
       if (num.value < 0) {
         num.value = num.value * -1;
       }
       rellenar_info();
+	 }else {error();}   
     }
 
     const fact = () => {
+	
+	if (validar()){
+	
       let num = document.getElementById("pantalla");
       var i;
       var total = 1;
@@ -45,33 +69,52 @@
       }
       num.value = total;
       rellenar_info();
+	  
+	 }else {error();}   
     }
 
     const add = () => {
+	
+	if (validar()){
       primer_numero = document.getElementById("pantalla").value;
       operacion = "+";
       vaciar();
+	  
+	}else {error();}   
     }
 
     const mul = () => {
+	
+	if (validar()){
+	
       primer_numero = document.getElementById("pantalla").value;
       operacion = "*";
       vaciar();
+	  
+	}else {error();}  
     }
 
     const menos = () => {
+	
+	if (validar()){
       primer_numero = document.getElementById("pantalla").value;
       operacion = "-";
       vaciar();
+	}else {error();}    
     }
 
     const dividir = () => {
+	
+	if (validar ()){
       primer_numero = document.getElementById("pantalla").value;
       operacion = "/";
       vaciar();
+	}else {error();}    
     }
 
     const eq = () => {
+	
+	if (validar()){
       let num = document.getElementById("pantalla");
       switch(operacion) {
         case "+":
@@ -90,17 +133,38 @@
       primer_numero = null;
       operacion = null;
       rellenar_info();
+	  
+	}else {error();}    
     }
+
+	const validar_lista = (lista) => {
+	
+	 for (var i=0; i<lista.length; i++){
+	 
+	    if ( isNaN (lista[i])){
+		 error();
+		return false;
+		
+		}
+	
+	 }
+	 return true;
+	}
 
     const sumatorio = () => {
       let num = document.getElementById("pantalla");
       let numbersArray = num.value.split(",");
+	  
+	  if (validar_lista(numbersArray)){
+	  
       var sum = 0;
       numbersArray.forEach(number => {
         sum = sum + Number(number);
       });
       num.value = sum;
       rellenar_info();
+	  
+	  }
     }
 
     function sortStringAsNumber(a, b) {
@@ -112,22 +176,33 @@
     const ordenar = () => {
       let num = document.getElementById("pantalla");
       let numbersArray = num.value.split(",");
-      numbersArray.sort(sortStringAsNumber);
-      num.value = numbersArray;
+	  if (validar_lista(numbersArray)){
+       numbersArray.sort(sortStringAsNumber);
+       num.value = numbersArray;
+	  } 
     }
 
     const revertir = () => {
       let num = document.getElementById("pantalla");
       let numbersArray = num.value.split(",");
-      num.value = numbersArray.reverse();
+	  if (validar_lista(numbersArray)){
+	  
+       num.value = numbersArray.reverse();
+	  } 
     }
 
     const quitar = () => {
       let num = document.getElementById("pantalla");
       let numbersArray = num.value.split(",");
-      numbersArray.pop();
-      num.value = numbersArray;
+	  
+	  if (validar_lista(numbersArray)){
+	  
+       numbersArray.pop();
+       num.value = numbersArray;
+	  
+	  } 
     }
+	
 
   </script>
 </head>
